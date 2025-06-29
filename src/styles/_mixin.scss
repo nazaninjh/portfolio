@@ -1,5 +1,15 @@
+@use "sass:map";
+@use "./breakpoints" as breakMap;
 @mixin apply_theme($theme) {
   @each $key, $value in $theme {
     --#{$key}: #{$value};
+  }
+}
+
+@mixin mq($breaks_key) {
+  $breakpoint: map.get(breakMap.$breaks, $breaks_key);
+
+  @media (min-width: $breakpoint) {
+    @content;
   }
 }

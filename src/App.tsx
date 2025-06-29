@@ -1,4 +1,11 @@
+import HeaderComponent from "./components/header/header.component";
+import ThemeTogglerComponent from "./components/theme-toggler/themeToggler.component";
 import styles from "./App.module.scss";
 export default function App() {
-  return <div className={styles.app}>App</div>;
+  return (
+    <div className={styles.app}>
+      <ThemeTogglerComponent />
+      <HeaderComponent />
+    </div>
+  );
 }
