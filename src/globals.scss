@@ -1,0 +1,29 @@
+@use "./styles/mixin" as mixin;
+@use "./styles/maps" as map;
+
+@font-face {
+  font-family: "Poppins";
+  src:
+    local("Poppins"),
+    url(./assets/fonts/poppins/poppins-regular-webfont.woff2) format(woff2),
+    url(./assets/fonts/poppins/poppins-regular-webfont.woff) format(woff),
+    url(./assets/fonts/poppins/Poppins-Regular.ttf) format(ttf);
+
+  font-weight: 400;
+}
+
+:root {
+  @include mixin.apply_theme(map.$theme-light);
+}
+
+body.dark {
+  @include mixin.apply_theme(map.$theme-dark);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Poppins", "Times New Roman", Times, serif;
+}

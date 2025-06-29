@@ -1,0 +1,17 @@
+$theme-light: (
+  background-clr: hsl(200, 7%, 92%),
+  surface-clr: hsl(0, 0%, 91%),
+  surface-hover-clr: hsl(0, 0%, 84%),
+  primary-clr: hsl(48, 92%, 60%),
+  text-dark-clr: hsl(0, 0%, 24%),
+  text-light-clr: hsl(220, 12%, 95%),
+);
+
+$theme-dark: (
+  background-clr: hsl(208, 41%, 8%),
+  surface-clr: hsl(208, 25%, 12%),
+  surface-hover-clr: hsl(208, 41%, 8%),
+  primary-clr: hsl(48, 92%, 60%),
+  text-dark-clr: hsl(0, 0%, 24%),
+  text-light-clr: hsl(220, 12%, 95%),
+);
