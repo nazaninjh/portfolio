@@ -7,7 +7,7 @@ export default function ThemeTogglerComponent() {
     // check for preference when user first visits
     if (!localStorage.getItem("theme")) {
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
 
       if (prefersDark) {
