@@ -1,0 +1,51 @@
+.wrapper {
+  display: grid;
+  grid-template-areas: "img text" "img icon";
+  align-items: center;
+  column-gap: 3rem;
+
+  .img-box {
+    grid-area: img;
+
+    outline: 0.3rem solid var(--primary-clr);
+
+    outline-offset: 0.5rem;
+    position: relative;
+    display: grid;
+    grid-template-areas: "stack";
+    justify-items: center;
+    align-items: center;
+
+    border-radius: 100%;
+    .img-bg {
+      grid-area: stack;
+      background-color: var(--primary-clr);
+      width: 100%;
+      height: 100%;
+
+      border-radius: 100%;
+      z-index: 1;
+    }
+    > img {
+      grid-area: stack;
+      z-index: 2;
+      border-radius: 100%;
+    }
+  }
+  .text-box {
+    grid-area: text;
+
+    color: var(--theme-text-color);
+  }
+
+  .icon-box {
+    grid-area: icon;
+
+    display: flex;
+    gap: 1rem;
+
+    > a {
+      color: var(--theme-text-color);
+    }
+  }
+}
