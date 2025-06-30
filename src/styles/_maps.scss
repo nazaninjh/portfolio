@@ -5,7 +5,7 @@ $theme-light: (
   surface-hover-clr: hsl(0, 0%, 84%),
   primary-clr: hsl(48, 92%, 60%),
   text-dark-clr: hsl(0, 0%, 24%),
-  text-light-clr: hsl(220, 12%, 95%),
+  text-light-clr: hsl(0, 0%, 34%),
   theme-text-color: hsl(0, 0%, 24%),
 );
 
@@ -16,6 +16,6 @@ $theme-dark: (
   surface-hover-clr: hsl(208, 41%, 8%),
   primary-clr: hsl(48, 92%, 60%),
   text-dark-clr: hsl(0, 0%, 24%),
-  text-light-clr: hsl(220, 12%, 95%),
+  text-light-clr: hsl(208, 9%, 67%),
   theme-text-color: hsl(220, 12%, 95%),
 );

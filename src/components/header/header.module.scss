@@ -1,8 +1,16 @@
+@use "./../../styles/mixin" as mixin;
+
 .wrapper {
   display: grid;
-  grid-template-areas: "img text" "img icon";
+  grid-template-areas: "img" "text" "btns";
   align-items: center;
-  column-gap: 3rem;
+  justify-items: center;
+  row-gap: 3rem;
+
+  @include mixin.mq(sm) {
+    grid-template-areas: "img text" "btns btns";
+    column-gap: 3rem;
+  }
 
   .img-box {
     grid-area: img;
@@ -17,6 +25,9 @@
     align-items: center;
 
     border-radius: 100%;
+
+    width: fit-content;
+    height: fit-content;
     .img-bg {
       grid-area: stack;
       background-color: var(--primary-clr);
@@ -34,18 +45,85 @@
   }
   .text-box {
     grid-area: text;
+    display: grid;
+    justify-items: center;
+    text-align: center;
 
-    color: var(--theme-text-color);
+    @include mixin.mq(sm) {
+      text-align: start;
+      justify-items: start;
+    }
+
+    h1 {
+      color: var(--theme-text-color);
+      font-size: var(--fz-xl);
+    }
+
+    h4 {
+      color: var(--text-light-clr);
+      font-size: var(--fz-sm);
+    }
   }
 
   .icon-box {
-    grid-area: icon;
-
     display: flex;
     gap: 1rem;
 
     > a {
-      color: var(--theme-text-color);
+      color: var(--text-light-clr);
+    }
+  }
+
+  .btns {
+    grid-area: btns;
+    display: flex;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      @include mixin.Shared_btn(
+        $bg: var(--surface-clr),
+        $text-color: var(--theme-text-color)
+      );
+      width: 100%;
+      font-size: var(--fz-sm);
+
+      cursor: pointer;
+
+      svg {
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: var(--fz-sm);
+      text-decoration: none;
+      @include mixin.Shared_btn(
+        $bg: var(--primary-clr),
+        $text-color: var(--text-dark-clr)
+      );
+      width: 100%;
+
+      .icon {
+        display: none;
+        @include mixin.mq(sm) {
+          display: inline-flex;
+        }
+      }
     }
   }
 }

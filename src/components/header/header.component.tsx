@@ -1,3 +1,4 @@
+import DownloadIcon from "./assets/icons/download.icon";
 import GithubIcon from "./assets/icons/github.icon";
 import LinkedinIcon from "./assets/icons/linkedin.icon";
 import me from "./assets/images/me-raw.png";
@@ -8,29 +9,47 @@ export default function HeaderComponent() {
     <header className={styles.wrapper}>
       <div className={styles["img-box"]}>
         <div className={styles["img-bg"]} />
-        <img alt="" src={me} width={180} height={180} />
+        <img alt="" src={me} width={150} height={150} />
       </div>
       <div className={styles["text-box"]}>
-        <h1>Nazanin Hashemi</h1>
-        <h4>Front End Web Developer</h4>
+        <div>
+          <h1>Nazanin Hashemi</h1>
+          <h4>Front End Web Developer</h4>
+        </div>
+        <div className={styles["icon-box"]}>
+          <a
+            href="https://www.linkedin.com/in/nazanin-hashemi-a141342a3/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <LinkedinIcon width={25} height={25} />
+          </a>
+          <a
+            href="https://github.com/nazaninjh"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+          >
+            <GithubIcon width={23} height={23} />
+          </a>
+        </div>
       </div>
-      <div className={styles["icon-box"]}>
+      <div className={styles.btns}>
         <a
-          href="https://www.linkedin.com/in/nazanin-hashemi-a141342a3/"
+          href="/my-resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="LinkedIn Profile"
+          aria-label="my-cv"
         >
-          <LinkedinIcon width={25} height={25} />
+          <span>My resume</span>
+          <span className={styles.icon}>
+            <DownloadIcon />
+          </span>
         </a>
-        <a
-          href="https://github.com/nazaninjh"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub Profile"
-        >
-          <GithubIcon width={23} height={23} />
-        </a>
+        <button type="button">
+          <span>Contact me</span>
+        </button>
       </div>
     </header>
   );
