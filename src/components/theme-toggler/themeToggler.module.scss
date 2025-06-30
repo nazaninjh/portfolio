@@ -1,0 +1,16 @@
+.toggler {
+  background-color: var(--surface-clr);
+  color: var(--theme-text-color);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+
+  cursor: pointer;
+  transition: filter 500ms ease-in-out;
+}
