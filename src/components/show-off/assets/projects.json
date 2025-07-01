@@ -1,0 +1,16 @@
+[
+  {
+    "media": [
+      {
+        "name": "Sin designer",
+        "toDisplayOnlyOne": {
+          "img": "sin1",
+          "video": "video1"
+        },
+
+        "images": ["sin1", "sin2", "sin3", "sin4", "sin5"],
+        "video": ["video1", "video2", "video3"]
+      }
+    ]
+  }
+]

@@ -13,11 +13,11 @@
 
   @include mixin.mq(sm) {
     padding-inline: 2rem;
-    max-width: map.get(brs.$breaks, lg);
+    max-width: map.get(brs.$breaks, md);
   }
-  @include mixin.mq(lg) {
+  @include mixin.mq(md) {
     padding-inline: 0;
-    max-width: map.get(brs.$breaks, lg);
+    max-width: map.get(brs.$breaks, md);
     margin: 0 auto;
   }
 }

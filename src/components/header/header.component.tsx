@@ -47,9 +47,9 @@ export default function HeaderComponent() {
             <DownloadIcon />
           </span>
         </a>
-        <button type="button">
+        <a href="mailto:nazanin.jh97@gmail.com">
           <span>Contact me</span>
-        </button>
+        </a>
       </div>
     </header>
   );

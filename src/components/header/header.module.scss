@@ -1,11 +1,15 @@
 @use "./../../styles/mixin" as mixin;
+@use "./../../styles/placeholders";
 
 .wrapper {
   display: grid;
   grid-template-areas: "img" "text" "btns";
   align-items: center;
   justify-items: center;
+  justify-content: center;
   row-gap: 3rem;
+
+  width: 100%;
 
   @include mixin.mq(sm) {
     grid-template-areas: "img text" "btns btns";
@@ -14,15 +18,13 @@
 
   .img-box {
     grid-area: img;
+    @extend %grid-stack;
+    justify-items: center;
+    align-items: center;
 
     outline: 0.3rem solid var(--primary-clr);
 
     outline-offset: 0.5rem;
-    position: relative;
-    display: grid;
-    grid-template-areas: "stack";
-    justify-items: center;
-    align-items: center;
 
     border-radius: 100%;
 
@@ -83,28 +85,6 @@
     justify-content: space-between;
     gap: 1rem;
 
-    > button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      @include mixin.Shared_btn(
-        $bg: var(--surface-clr),
-        $text-color: var(--theme-text-color)
-      );
-      width: 100%;
-      font-size: var(--fz-sm);
-
-      cursor: pointer;
-
-      svg {
-        padding: 0;
-
-        display: flex;
-        align-items: center;
-      }
-    }
-
     > a {
       display: flex;
       align-items: center;
@@ -112,17 +92,38 @@
       gap: 0.5rem;
       font-size: var(--fz-sm);
       text-decoration: none;
+
+      width: 100%;
+      font-size: var(--fz-sm);
+
+      cursor: pointer;
+    }
+
+    > a:first-child {
       @include mixin.Shared_btn(
         $bg: var(--primary-clr),
         $text-color: var(--text-dark-clr)
       );
-      width: 100%;
 
       .icon {
         display: none;
         @include mixin.mq(sm) {
           display: inline-flex;
         }
+      }
+    }
+
+    > a:last-child {
+      @include mixin.Shared_btn(
+        $bg: var(--surface-clr),
+        $text-color: var(--theme-text-color)
+      );
+
+      svg {
+        padding: 0;
+
+        display: flex;
+        align-items: center;
       }
     }
   }
