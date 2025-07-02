@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import media from "./assets/projects.json";
+import media from "@/assets/json/projects.json";
 import { clsx } from "clsx";
 import styles from "./showOff.module.scss";
-import { mapMedia, type mediaKey } from "./mapMedia";
+import { mapMedia, type mediaKey } from "@/functions/mapMedia";
 
 type IMedia = {
   media: {
@@ -28,8 +28,6 @@ export default function ShowOffComponent() {
     if (!videoRef.current) return;
     videoRef.current.playbackRate = 3;
     videoRef.current.play();
-
-    console.log("entered");
   };
   const pauseVideo = () => {
     if (!videoRef.current) return;
@@ -60,18 +58,18 @@ export default function ShowOffComponent() {
           {(media as IMedia[]).map((source) => {
             return source.media.map((item) => {
               return (
-                <div className={styles.media}>
+                <div className={styles.media} key={item.name + item.video}>
                   {item.toDisplayOnlyOne.video && (
                     <video
                       ref={videoRef}
-                      key={item.toDisplayOnlyOne.video}
+                      key={item.name + item.toDisplayOnlyOne.video}
                       onMouseEnter={playVideo}
                       onMouseLeave={pauseVideo}
                       muted
                     >
                       <source
                         src={mapMedia(
-                          "videos",
+                          "sinVideos",
                           item.toDisplayOnlyOne.video as mediaKey
                         )}
                         type="video/webm"
@@ -80,10 +78,10 @@ export default function ShowOffComponent() {
                     </video>
                   )}
                   <img
-                    key={item.toDisplayOnlyOne.img}
+                    key={item.name}
                     alt=""
                     src={mapMedia(
-                      "images",
+                      "sinImages",
                       item.toDisplayOnlyOne.img as mediaKey
                     )}
                     height={videoRef.current?.height}
