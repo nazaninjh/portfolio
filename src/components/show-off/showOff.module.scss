@@ -1,8 +1,23 @@
 @use "./../../styles/mixin" as mixin;
 
+@use "./../../styles/placeholders";
+
 %opposite-colors {
   background-color: var(--surface-hover-clr);
   color: var(--theme-text-color);
+}
+
+%center-stack {
+  grid-area: stack;
+  justify-self: center;
+  align-self: center;
+}
+
+%overlay {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .wrapper {
   display: grid;
@@ -44,18 +59,124 @@
       width: 100%;
 
       padding: 3rem 0;
-      > video {
-        object-fit: contain;
+      .video-container {
+        @extend %grid-stack;
         width: 100%;
+        height: fit-content;
+        > video {
+          grid-area: stack;
+          object-fit: contain;
+          width: 100%;
 
-        border-radius: 0.75rem;
+          border-radius: 0.75rem;
+        }
+        .play {
+          @extend %center-stack;
+          color: var(--background-clr);
+
+          outline: none;
+          border: none;
+          background-color: transparent;
+
+          cursor: pointer;
+          z-index: 2;
+
+          transition: color 200ms ease-in;
+
+          &:hover {
+            color: var(--background-opposite-clr);
+          }
+
+          &.hide {
+            display: none;
+          }
+        }
+        .overlay {
+          grid-area: stack;
+          @extend %overlay;
+
+          &.hide {
+            display: none;
+          }
+        }
       }
-
-      > img {
-        object-fit: cover;
+      .img-container {
+        @extend %grid-stack;
         width: 100%;
         height: 100%;
-        border-radius: 0.75rem;
+        > img {
+          grid-area: stack;
+          object-fit: cover;
+          width: 100%;
+
+          border-radius: 0.75rem;
+        }
+        .text-container {
+          opacity: 0;
+          grid-area: stack;
+          align-self: center;
+          justify-self: center;
+          text-align: center;
+
+          display: grid;
+          justify-items: center;
+          row-gap: 0.3rem;
+          color: whitesmoke;
+
+          padding: 1rem;
+
+          cursor: pointer;
+
+          font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Oxygen,
+            Ubuntu,
+            Cantarell,
+            "Open Sans",
+            "Helvetica Neue",
+            sans-serif;
+
+          transition: opacity 500ms ease-in;
+
+          &.show {
+            opacity: 1;
+          }
+          .key,
+          .value {
+            text-shadow: 1px 1px 0.5rem rgb(83, 83, 83);
+          }
+          .key {
+            font-size: calc(var(--fz-sm) + 0.1rem);
+          }
+          .value {
+            font-size: var(--fz-sm);
+          }
+
+          .img-btn {
+            color: whitesmoke;
+            background-color: var(--primary-clr);
+
+            padding: 0.2rem 0.5rem;
+            margin-block-start: 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+          }
+        }
+        .overlay {
+          opacity: 0;
+          grid-area: stack;
+          @extend %overlay;
+
+          transition: opacity 300ms ease-in;
+
+          &.show {
+            opacity: 1;
+          }
+        }
       }
     }
   }

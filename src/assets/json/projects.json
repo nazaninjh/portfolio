@@ -3,6 +3,8 @@
     "media": [
       {
         "name": "Sin designer",
+        "description": "A 3D web-application to design Sheds(warehauses).",
+        "mapCode": "sinMedia",
         "toDisplayOnlyOne": {
           "img": "sin1",
           "video": "sinVideo1"

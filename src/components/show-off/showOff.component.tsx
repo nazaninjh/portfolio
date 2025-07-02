@@ -1,12 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import media from "@/assets/json/projects.json";
 import { clsx } from "clsx";
 import styles from "./showOff.module.scss";
-import { mapMedia, type mediaKey } from "@/functions/mapMedia";
+import { mapMedia, type IMediaKey, type serveKey } from "@/functions/mapMedia";
+import { PlayIcon } from "./assets/icons/Play.icon";
 
 type IMedia = {
   media: {
     name: string;
+    description: string;
+    mapCode: string;
     toDisplayOnlyOne: {
       img: string;
       video: string;
@@ -19,20 +22,54 @@ type IMedia = {
 
 export default function ShowOffComponent() {
   const [tab, setTab] = useState<"projects" | "skills">("projects");
+  const [videoHeight, setVideoHeight] = useState(100);
+  const [hidePlayBtn, sethidePlayBtn] = useState(false);
+  const [showImgInfo, setShowImgInfo] = useState(false);
+
   const videoRef = useRef<null | HTMLVideoElement>(null);
   const changeTab = (tabName: "projects" | "skills") => {
     setTab(tabName);
   };
 
-  const playVideo = () => {
+  const playPause = () => {
     if (!videoRef.current) return;
     videoRef.current.playbackRate = 3;
-    videoRef.current.play();
+    const isPaused = videoRef.current.paused;
+
+    if (isPaused) {
+      videoRef.current.play();
+      sethidePlayBtn(true);
+    } else {
+      videoRef.current.pause();
+      sethidePlayBtn(false);
+    }
   };
-  const pauseVideo = () => {
+
+  useEffect(() => {
     if (!videoRef.current) return;
-    videoRef.current.pause();
-  };
+    const parent = videoRef.current.parentElement;
+
+    if (parent && parent.clientHeight) {
+      setVideoHeight(parent.clientHeight);
+    }
+  }, [videoRef]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    const video = videoRef.current;
+    const reset = () => {
+      sethidePlayBtn(false);
+
+      if (video && video.currentTime) {
+        video.currentTime = 0;
+      }
+    };
+    video.addEventListener("ended", reset);
+
+    return () => {
+      video.removeEventListener("ended", reset);
+    };
+  }, [hidePlayBtn]);
 
   return (
     <section className={styles.wrapper}>
@@ -60,33 +97,83 @@ export default function ShowOffComponent() {
               return (
                 <div className={styles.media} key={item.name + item.video}>
                   {item.toDisplayOnlyOne.video && (
-                    <video
-                      ref={videoRef}
-                      key={item.name + item.toDisplayOnlyOne.video}
-                      onMouseEnter={playVideo}
-                      onMouseLeave={pauseVideo}
-                      muted
-                    >
-                      <source
-                        src={mapMedia(
-                          "sinVideos",
-                          item.toDisplayOnlyOne.video as mediaKey
+                    <div className={styles["video-container"]}>
+                      <video
+                        onClick={playPause}
+                        ref={videoRef}
+                        key={item.name + item.toDisplayOnlyOne.video}
+                        muted
+                      >
+                        <source
+                          src={mapMedia(
+                            item.mapCode as serveKey,
+                            item.toDisplayOnlyOne.video as IMediaKey,
+                            "video",
+                          )}
+                          type="video/webm"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
+                      <div
+                        className={clsx(
+                          styles.overlay,
+                          hidePlayBtn && styles.hide,
                         )}
-                        type="video/webm"
                       />
-                      Your browser does not support the video tag.
-                    </video>
+                      <button
+                        title="play/pause"
+                        type="button"
+                        className={clsx(
+                          styles.play,
+                          hidePlayBtn && styles.hide,
+                        )}
+                        onClick={playPause}
+                      >
+                        <PlayIcon width={50} height={50} />
+                      </button>
+                    </div>
                   )}
-                  <img
-                    key={item.name}
-                    alt=""
-                    src={mapMedia(
-                      "sinImages",
-                      item.toDisplayOnlyOne.img as mediaKey
-                    )}
-                    height={videoRef.current?.height}
-                  />
-                  <p>{}</p>
+                  <div
+                    className={styles["img-container"]}
+                    style={{ height: videoHeight }}
+                    onMouseEnter={() => setShowImgInfo(true)}
+                    onMouseLeave={() => setShowImgInfo(false)}
+                  >
+                    {/* make a route changing btn here to gallary */}
+                    <img
+                      key={item.name}
+                      alt=""
+                      src={mapMedia(
+                        item.mapCode as serveKey,
+                        item.toDisplayOnlyOne.img as IMediaKey,
+                        "image",
+                      )}
+                      style={{ height: videoHeight }}
+                    />
+                    <div
+                      className={clsx(
+                        styles.overlay,
+                        showImgInfo && styles.show,
+                      )}
+                    />
+                    <div
+                      className={clsx(
+                        styles["text-container"],
+                        showImgInfo && styles.show,
+                      )}
+                    >
+                      <div>
+                        <span className={styles.key}>Name: </span>
+                        <span className={styles.value}>{item.name}</span>
+                      </div>
+                      <div>
+                        <span className={styles.value}>{item.description}</span>
+                      </div>
+                      <button className={styles["img-btn"]} type="button">
+                        More Info
+                      </button>
+                    </div>
+                  </div>
                 </div>
               );
             });

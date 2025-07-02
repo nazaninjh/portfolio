@@ -20,16 +20,25 @@ const sinImages = {
   sin4,
 };
 
+const sinMedia = {
+  image: sinImages,
+  video: sinVideos,
+};
+
 const serveMedia = {
-  sinVideos,
-  sinImages,
+  sinMedia,
 };
 
 export type serveKey = keyof typeof serveMedia;
-export type mediaKey = keyof (typeof serveMedia)[serveKey];
+type IMediaType = "image" | "video";
+export type IMediaKey = keyof (typeof serveMedia)[serveKey][IMediaType];
 
-const mapMedia = (objKey: serveKey, mediaKey: mediaKey) => {
-  const targetObj = serveMedia[objKey];
+const mapMedia = (
+  targetKey: serveKey,
+  mediaKey: IMediaKey,
+  mediaType: IMediaType,
+) => {
+  const targetObj = serveMedia[targetKey][mediaType];
   return targetObj[mediaKey];
 };
 
