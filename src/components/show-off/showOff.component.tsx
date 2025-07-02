@@ -108,7 +108,7 @@ export default function ShowOffComponent() {
                           src={mapMedia(
                             item.mapCode as serveKey,
                             item.toDisplayOnlyOne.video as IMediaKey,
-                            "video",
+                            "video"
                           )}
                           type="video/webm"
                         />
@@ -117,7 +117,7 @@ export default function ShowOffComponent() {
                       <div
                         className={clsx(
                           styles.overlay,
-                          hidePlayBtn && styles.hide,
+                          hidePlayBtn && styles.hide
                         )}
                       />
                       <button
@@ -125,7 +125,7 @@ export default function ShowOffComponent() {
                         type="button"
                         className={clsx(
                           styles.play,
-                          hidePlayBtn && styles.hide,
+                          hidePlayBtn && styles.hide
                         )}
                         onClick={playPause}
                       >
@@ -137,7 +137,9 @@ export default function ShowOffComponent() {
                     className={styles["img-container"]}
                     style={{ height: videoHeight }}
                     onMouseEnter={() => setShowImgInfo(true)}
+                    onPointerDown={() => setShowImgInfo(true)}
                     onMouseLeave={() => setShowImgInfo(false)}
+                    onPointerLeave={() => setShowImgInfo(false)}
                   >
                     {/* make a route changing btn here to gallary */}
                     <img
@@ -146,20 +148,20 @@ export default function ShowOffComponent() {
                       src={mapMedia(
                         item.mapCode as serveKey,
                         item.toDisplayOnlyOne.img as IMediaKey,
-                        "image",
+                        "image"
                       )}
                       style={{ height: videoHeight }}
                     />
                     <div
                       className={clsx(
                         styles.overlay,
-                        showImgInfo && styles.show,
+                        showImgInfo && styles.show
                       )}
                     />
                     <div
                       className={clsx(
                         styles["text-container"],
-                        showImgInfo && styles.show,
+                        showImgInfo && styles.show
                       )}
                     >
                       <div>
