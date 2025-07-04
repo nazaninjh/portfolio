@@ -143,6 +143,7 @@ export default function ShowOffComponent() {
                             styles.overlay,
                             activeVideoIndex === index && styles.hide
                           )}
+                          style={{ height: videoHeight }}
                         />
                         <button
                           title="play/pause"

@@ -24,6 +24,18 @@
 
         "images": ["admin1", "sin2", "sin3", "sin4", "sin5"],
         "video": ["adminVideo", "sinVideo2", "sinVideo3"]
+      },
+      {
+        "name": "Authentication",
+        "description": "Authentication for Beigi group websites",
+        "mapCode": "authMedia",
+        "toDisplayOnlyOne": {
+          "img": "auth1",
+          "video": "authVideo"
+        },
+
+        "images": ["auth1", "sin2", "sin3", "sin4", "sin5"],
+        "video": ["authVideo", "sinVideo2", "sinVideo3"]
       }
     ]
   }

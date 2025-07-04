@@ -8,8 +8,10 @@ import sinVideo2 from "@/assets/videos/sin/sin-designer-video2.webm";
 import sinVideo3 from "@/assets/videos/sin/sin-designer-video3.webm";
 
 import admin1 from "@/assets/images/admin/admin1.png";
-
 import adminVideo from "@/assets/videos/admin/admin.webm";
+
+import auth1 from "@/assets/images/auth/auth1.webp";
+import authVideo from "@/assets/videos/auth/auth.webm";
 
 const sinVideos = {
   sinVideo1,
@@ -28,6 +30,10 @@ const adminMedia = {
   image: { admin1 },
   video: { adminVideo },
 };
+const authMedia = {
+  image: { auth1 },
+  video: { authVideo },
+};
 
 const sinMedia = {
   image: sinImages,
@@ -37,6 +43,7 @@ const sinMedia = {
 const serveMedia = {
   sinMedia,
   adminMedia,
+  authMedia,
 };
 
 export type serveKey = keyof typeof serveMedia;
