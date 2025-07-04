@@ -20,6 +20,7 @@ type IMedia = {
 };
 
 export default function ShowOffComponent() {
+  // todo: add loading for videos
   const [tab, setTab] = useState<"projects" | "skills">("projects");
   const [videoHeight, setVideoHeight] = useState(100);
 
@@ -162,7 +163,9 @@ export default function ShowOffComponent() {
                       className={styles["img-container"]}
                       style={{ height: videoHeight }}
                       onMouseEnter={() => setActiveImageIndex(index)}
+                      onPointerDown={() => setActiveImageIndex(index)}
                       onMouseLeave={() => setActiveImageIndex(null)}
+                      onPointerLeave={() => setActiveImageIndex(null)}
                     >
                       <img
                         key={item.name}
