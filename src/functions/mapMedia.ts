@@ -7,6 +7,10 @@ import sinVideo1 from "@/assets/videos/sin/sin-designer-video1.webm";
 import sinVideo2 from "@/assets/videos/sin/sin-designer-video2.webm";
 import sinVideo3 from "@/assets/videos/sin/sin-designer-video3.webm";
 
+import admin1 from "@/assets/images/admin/admin1.png";
+
+import adminVideo from "@/assets/videos/admin/admin.webm";
+
 const sinVideos = {
   sinVideo1,
   sinVideo2,
@@ -20,6 +24,11 @@ const sinImages = {
   sin4,
 };
 
+const adminMedia = {
+  image: { admin1 },
+  video: { adminVideo },
+};
+
 const sinMedia = {
   image: sinImages,
   video: sinVideos,
@@ -27,6 +36,7 @@ const sinMedia = {
 
 const serveMedia = {
   sinMedia,
+  adminMedia,
 };
 
 export type serveKey = keyof typeof serveMedia;
@@ -36,9 +46,10 @@ export type IMediaKey = keyof (typeof serveMedia)[serveKey][IMediaType];
 const mapMedia = (
   targetKey: serveKey,
   mediaKey: IMediaKey,
-  mediaType: IMediaType,
+  mediaType: IMediaType
 ) => {
   const targetObj = serveMedia[targetKey][mediaType];
+
   return targetObj[mediaKey];
 };
 

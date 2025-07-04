@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import media from "@/assets/json/projects.json";
 import { clsx } from "clsx";
 import styles from "./showOff.module.scss";
@@ -14,7 +14,6 @@ type IMedia = {
       img: string;
       video: string;
     };
-
     images: [];
     video: [];
   }[];
@@ -23,53 +22,74 @@ type IMedia = {
 export default function ShowOffComponent() {
   const [tab, setTab] = useState<"projects" | "skills">("projects");
   const [videoHeight, setVideoHeight] = useState(100);
-  const [hidePlayBtn, sethidePlayBtn] = useState(false);
-  const [showImgInfo, setShowImgInfo] = useState(false);
 
-  const videoRef = useRef<null | HTMLVideoElement>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+  const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
+
+  const videoRefs = useRef<HTMLVideoElement[]>([]);
+
   const changeTab = (tabName: "projects" | "skills") => {
     setTab(tabName);
   };
 
-  const playPause = () => {
-    if (!videoRef.current) return;
-    videoRef.current.playbackRate = 3;
-    const isPaused = videoRef.current.paused;
-
-    if (isPaused) {
-      videoRef.current.play();
-      sethidePlayBtn(true);
+  const playPause = (index: number) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+    // if the video was paused and user clicks => play the video
+    if (video.paused) {
+      // Pause all other videos
+      videoRefs.current.forEach((v, i) => {
+        if (i !== index && v) v.pause();
+      });
+      video.playbackRate = 3;
+      video.play();
+      setActiveVideoIndex(index);
     } else {
-      videoRef.current.pause();
-      sethidePlayBtn(false);
+      video.pause();
+      setActiveVideoIndex(null);
     }
   };
 
   useEffect(() => {
-    if (!videoRef.current) return;
-    const parent = videoRef.current.parentElement;
-
-    if (parent && parent.clientHeight) {
-      setVideoHeight(parent.clientHeight);
-    }
-  }, [videoRef]);
+    let count = 0;
+    (media as IMedia[]).forEach((m) => {
+      count += m.media.length;
+    });
+    videoRefs.current = Array(count).fill(null);
+  }, []);
 
   useEffect(() => {
-    if (!videoRef.current) return;
-    const video = videoRef.current;
-    const reset = () => {
-      sethidePlayBtn(false);
+    if (!videoRefs.current) return;
 
-      if (video && video.currentTime) {
+    const handlers: { video: HTMLVideoElement; handler: () => void }[] = [];
+
+    videoRefs.current.forEach((video) => {
+      if (!video) return;
+
+      const handler = () => {
+        setActiveVideoIndex(null);
         video.currentTime = 0;
-      }
-    };
-    video.addEventListener("ended", reset);
+      };
+
+      video.addEventListener("ended", handler);
+      handlers.push({ video, handler });
+    });
 
     return () => {
-      video.removeEventListener("ended", reset);
+      handlers.forEach(({ video, handler }) => {
+        video.removeEventListener("ended", handler);
+      });
     };
-  }, [hidePlayBtn]);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!videoRefs.current) return;
+    videoRefs.current.forEach((video) => {
+      if (!video) return;
+      setVideoHeight(video.clientHeight);
+    });
+  });
 
   return (
     <section className={styles.wrapper}>
@@ -79,7 +99,7 @@ export default function ShowOffComponent() {
           className={clsx(tab === "projects" && styles.active, styles.btn)}
           onClick={() => changeTab("projects")}
         >
-          Projcts
+          Projects
         </button>
         <button
           type="button"
@@ -92,94 +112,98 @@ export default function ShowOffComponent() {
 
       {tab === "projects" && (
         <div className={styles["media-container"]}>
-          {(media as IMedia[]).map((source) => {
-            return source.media.map((item) => {
-              return (
-                <div className={styles.media} key={item.name + item.video}>
-                  {item.toDisplayOnlyOne.video && (
-                    <div className={styles["video-container"]}>
-                      <video
-                        onClick={playPause}
-                        ref={videoRef}
-                        key={item.name + item.toDisplayOnlyOne.video}
-                        muted
-                      >
-                        <source
-                          src={mapMedia(
-                            item.mapCode as serveKey,
-                            item.toDisplayOnlyOne.video as IMediaKey,
-                            "video"
+          {(() => {
+            return (media as IMedia[]).map((source) =>
+              source.media.map((item, index) => {
+                return (
+                  <div className={styles.media} key={item.name + item.video}>
+                    {item.toDisplayOnlyOne.video && (
+                      <div className={styles["video-container"]}>
+                        <video
+                          height={200}
+                          ref={(el) => {
+                            videoRefs.current[index] = el!;
+                          }}
+                          key={item.name + item.toDisplayOnlyOne.video}
+                          muted
+                          onClick={() => playPause(index)}
+                        >
+                          <source
+                            src={mapMedia(
+                              item.mapCode as serveKey,
+                              item.toDisplayOnlyOne.video as IMediaKey,
+                              "video"
+                            )}
+                            type="video/webm"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                        <div
+                          className={clsx(
+                            styles.overlay,
+                            activeVideoIndex === index && styles.hide
                           )}
-                          type="video/webm"
                         />
-                        Your browser does not support the video tag.
-                      </video>
+                        <button
+                          title="play/pause"
+                          type="button"
+                          className={clsx(
+                            styles.play,
+                            activeVideoIndex === index && styles.hide
+                          )}
+                          onClick={() => playPause(index)}
+                        >
+                          <PlayIcon width={50} height={50} />
+                        </button>
+                      </div>
+                    )}
+                    <div
+                      className={styles["img-container"]}
+                      style={{ height: videoHeight }}
+                      onMouseEnter={() => setActiveImageIndex(index)}
+                      onMouseLeave={() => setActiveImageIndex(null)}
+                    >
+                      <img
+                        key={item.name}
+                        alt=""
+                        src={mapMedia(
+                          item.mapCode as serveKey,
+                          item.toDisplayOnlyOne.img as IMediaKey,
+                          "image"
+                        )}
+                        style={{ height: videoHeight }}
+                      />
                       <div
                         className={clsx(
                           styles.overlay,
-                          hidePlayBtn && styles.hide
+                          activeImageIndex === index && styles.show
                         )}
                       />
-                      <button
-                        title="play/pause"
-                        type="button"
+                      <div
                         className={clsx(
-                          styles.play,
-                          hidePlayBtn && styles.hide
+                          styles["text-container"],
+                          activeImageIndex === index && styles.show
                         )}
-                        onClick={playPause}
                       >
-                        <PlayIcon width={50} height={50} />
-                      </button>
-                    </div>
-                  )}
-                  <div
-                    className={styles["img-container"]}
-                    style={{ height: videoHeight }}
-                    onMouseEnter={() => setShowImgInfo(true)}
-                    onPointerDown={() => setShowImgInfo(true)}
-                    onMouseLeave={() => setShowImgInfo(false)}
-                    onPointerLeave={() => setShowImgInfo(false)}
-                  >
-                    {/* make a route changing btn here to gallary */}
-                    <img
-                      key={item.name}
-                      alt=""
-                      src={mapMedia(
-                        item.mapCode as serveKey,
-                        item.toDisplayOnlyOne.img as IMediaKey,
-                        "image"
-                      )}
-                      style={{ height: videoHeight }}
-                    />
-                    <div
-                      className={clsx(
-                        styles.overlay,
-                        showImgInfo && styles.show
-                      )}
-                    />
-                    <div
-                      className={clsx(
-                        styles["text-container"],
-                        showImgInfo && styles.show
-                      )}
-                    >
-                      <div>
-                        <span className={styles.key}>Name: </span>
-                        <span className={styles.value}>{item.name}</span>
+                        <div>
+                          <span className={styles.key}>Name: </span>
+                          <span className={styles.value}>{item.name}</span>
+                        </div>
+                        <div>
+                          <span className={styles.value}>
+                            {item.description}
+                          </span>
+                        </div>
+                        <button className={styles["img-btn"]} type="button">
+                          More Info
+                        </button>
                       </div>
-                      <div>
-                        <span className={styles.value}>{item.description}</span>
-                      </div>
-                      <button className={styles["img-btn"]} type="button">
-                        More Info
-                      </button>
                     </div>
                   </div>
-                </div>
-              );
-            });
-          })}
+                );
+              })
+            );
+          })()}
         </div>
       )}
     </section>
