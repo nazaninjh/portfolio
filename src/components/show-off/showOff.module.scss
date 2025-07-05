@@ -62,10 +62,32 @@
       gap: 1rem;
       width: 100%;
 
-      .video-container {
-        @extend %grid-stack;
+      .placeholder {
+        opacity: 1;
+        height: 100%;
         width: 100%;
-        height: fit-content;
+
+        @extend %grid-stack;
+
+        &.hide {
+          display: none;
+        }
+      }
+
+      .video-container {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+
+        @extend %grid-stack;
+
+        &.show {
+          position: static;
+          opacity: 1;
+          height: 100%;
+          width: 100%;
+        }
         > video {
           grid-area: stack;
           object-fit: contain;
