@@ -1,5 +1,20 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+export type IProjectProps = {
+  imageDimensions: {
+    inline: number;
+    block: number;
+  };
+  videoHeight: number;
+  videoIsReady: boolean;
+  activeImageIndex: number | null;
+  setActiveImageIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  activeVideoIndex: number | null;
+  videoRefs: React.RefObject<HTMLVideoElement[]>;
+  imageRef: React.RefObject<HTMLImageElement | null>;
+  playPause: (index: number) => void;
+};
+
 export default function useShowOff() {
   const [tab, setTab] = useState<"projects" | "skills">("projects");
 
@@ -8,13 +23,13 @@ export default function useShowOff() {
     block: 200,
   });
   const [videoHeight, setVideoHeight] = useState(200);
-  const imageRef = useRef<null | HTMLImageElement>(null);
 
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
   const [videoIsReady, setVideoIsReady] = useState(false);
 
   const videoRefs = useRef<HTMLVideoElement[]>([]);
+  const imageRef = useRef<null | HTMLImageElement>(null);
 
   const changeTab = (tabName: "projects" | "skills") => {
     setTab(tabName);
@@ -100,19 +115,21 @@ export default function useShowOff() {
     tab,
 
     changeTab,
-    imageDimensions,
+    projects: {
+      imageDimensions,
 
-    videoHeight,
+      videoHeight,
 
-    videoIsReady,
+      videoIsReady,
 
-    activeImageIndex,
-    setActiveImageIndex,
-    activeVideoIndex,
+      activeImageIndex,
+      setActiveImageIndex,
+      activeVideoIndex,
 
-    videoRefs,
-    imageRef,
+      videoRefs,
+      imageRef,
 
-    playPause,
+      playPause,
+    },
   };
 }

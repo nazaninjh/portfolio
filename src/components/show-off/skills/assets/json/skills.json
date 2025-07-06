@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Javascript",
+    "icon": "jsICon",
+    "rating": 5
+  },
+  {
+    "title": "React",
+    "icon": "reactICon",
+    "rating": 4
+  },
+  {
+    "title": "Nextjs",
+    "icon": "nextICon",
+    "rating": 4
+  }
+]

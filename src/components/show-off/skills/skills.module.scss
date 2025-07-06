@@ -1,0 +1,51 @@
+@use "sass:color";
+@use "sass:map";
+@use "./../.././../styles/maps" as myMap;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  flex: 1;
+
+  padding: 1rem;
+  .card {
+    flex: 1 1 2rem;
+    display: inline-grid;
+    grid-template-areas:
+      "icon title"
+      "stars stars";
+    grid-template-columns: auto auto;
+    column-gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--primary-clr);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    .icon {
+      grid-area: icon;
+      justify-self: center;
+      width: auto;
+
+      color: var(--theme-text-color);
+    }
+    .title {
+      grid-area: title;
+      color: var(--theme-text-color);
+    }
+    .stars {
+      grid-area: stars;
+      display: flex;
+      justify-content: center;
+      .star {
+        grid-area: stars;
+        color: gray;
+        &.fill {
+          color: var(--primary-clr);
+        }
+      }
+    }
+  }
+}
