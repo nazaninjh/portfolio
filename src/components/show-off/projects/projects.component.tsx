@@ -51,7 +51,7 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
             <div
               className={clsx(
                 styles["video-container"],
-                videoIsReady && styles.show
+                videoIsReady && styles.show,
               )}
             >
               <video
@@ -68,7 +68,7 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
                   src={mapMedia(
                     item.mapCode as serveKey,
                     item.toDisplayOnlyOne.video as IMediaKey,
-                    "video"
+                    "video",
                   )}
                   type="video/webm"
                 />
@@ -77,7 +77,7 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
               <div
                 className={clsx(
                   styles.overlay,
-                  activeVideoIndex === index && styles.hide
+                  activeVideoIndex === index && styles.hide,
                 )}
                 style={{ height: videoHeight }}
               />
@@ -86,7 +86,7 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
                 type="button"
                 className={clsx(
                   styles.play,
-                  activeVideoIndex === index && styles.hide
+                  activeVideoIndex === index && styles.hide,
                 )}
                 onClick={() => playPause(index)}
               >
@@ -109,20 +109,20 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
                 src={mapMedia(
                   item.mapCode as serveKey,
                   item.toDisplayOnlyOne.img as IMediaKey,
-                  "image"
+                  "image",
                 )}
                 style={{ height: videoHeight }}
               />
               <div
                 className={clsx(
                   styles.overlay,
-                  activeImageIndex === index && styles.show
+                  activeImageIndex === index && styles.show,
                 )}
               />
               <div
                 className={clsx(
                   styles["text-container"],
-                  activeImageIndex === index && styles.show
+                  activeImageIndex === index && styles.show,
                 )}
               >
                 <div>
@@ -138,7 +138,7 @@ export default function ProjectsComponent({ props }: { props: IProjectProps }) {
               </div>
             </div>
           </article>
-        ))
+        )),
       )}
     </div>
   );

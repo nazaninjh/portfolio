@@ -53,7 +53,7 @@ export type IMediaKey = keyof (typeof serveMedia)[serveKey][IMediaType];
 const mapMedia = (
   targetKey: serveKey,
   mediaKey: IMediaKey,
-  mediaType: IMediaType
+  mediaType: IMediaType,
 ) => {
   const targetObj = serveMedia[targetKey][mediaType];
 

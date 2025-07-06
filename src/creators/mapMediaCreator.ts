@@ -12,7 +12,7 @@ export class MapMediaCreator {
 
   setMediaObj(
     name: string,
-    obj: { image: Record<string, unknown>; video: Record<string, unknown> }
+    obj: { image: Record<string, unknown>; video: Record<string, unknown> },
   ) {
     this.serveMedia.set(name, obj);
   }
