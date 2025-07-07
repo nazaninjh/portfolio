@@ -1,16 +1,19 @@
 [
   {
     "title": "Javascript",
+    "desc": "I use this to Interact with the browser and make the User happy 😉",
     "icon": "jsICon",
     "rating": 5
   },
   {
     "title": "React",
+    "desc": "A Framework to optimize performance and use the mighty JSX 😎",
     "icon": "reactICon",
     "rating": 4
   },
   {
     "title": "Nextjs",
+    "desc": "I won't have to deal with react-router anymore, and can have SEO 🎉",
     "icon": "nextICon",
     "rating": 4
   }

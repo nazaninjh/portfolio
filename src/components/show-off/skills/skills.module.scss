@@ -15,8 +15,9 @@
     display: inline-grid;
     grid-template-areas:
       "icon title"
+      "desc desc"
       "stars stars";
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr;
     column-gap: 0.5rem;
     align-items: center;
     justify-content: center;
@@ -24,12 +25,30 @@
     border: 1px solid var(--primary-clr);
     border-radius: 0.5rem;
     padding: 0.5rem;
+
+    cursor: grab;
+
+    opacity: 1;
+    filter: none;
+    transition:
+      opacity 500ms ease,
+      filter 300ms ease-in;
+
+    &.dragging {
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
     .icon {
       grid-area: icon;
       justify-self: center;
       width: auto;
 
       color: var(--theme-text-color);
+    }
+    .desc {
+      grid-area: desc;
+      color: var(--theme-text-color);
+      font-size: var(--fz-sm);
     }
     .title {
       grid-area: title;
