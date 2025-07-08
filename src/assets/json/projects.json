@@ -1,0 +1,42 @@
+[
+  {
+    "media": [
+      {
+        "name": "Sin designer",
+        "description": "A 3D web-application to design Sheds(warehauses).",
+        "mapCode": "sinMedia",
+        "toDisplayOnlyOne": {
+          "img": "sin1",
+          "video": "sinVideo1"
+        },
+
+        "images": ["sin1", "sin2", "sin3", "sin4", "sin5"],
+        "video": ["sinVideo1", "sinVideo2", "sinVideo3"]
+      },
+      {
+        "name": "Admin Dashboard",
+        "description": "Dashboard for managing sin designer",
+        "mapCode": "adminMedia",
+        "toDisplayOnlyOne": {
+          "img": "admin1",
+          "video": "adminVideo"
+        },
+
+        "images": ["admin1", "sin2", "sin3", "sin4", "sin5"],
+        "video": ["adminVideo", "sinVideo2", "sinVideo3"]
+      },
+      {
+        "name": "Authentication",
+        "description": "Authentication for Beigi group websites",
+        "mapCode": "authMedia",
+        "toDisplayOnlyOne": {
+          "img": "auth1",
+          "video": "authVideo"
+        },
+
+        "images": ["auth1", "sin2", "sin3", "sin4", "sin5"],
+        "video": ["authVideo", "sinVideo2", "sinVideo3"]
+      }
+    ]
+  }
+]

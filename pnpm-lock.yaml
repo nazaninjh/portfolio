@@ -44,7 +44,7 @@ importers:
         version: 19.1.6(@types/react@19.1.8)
       '@vitejs/plugin-react-swc':
         specifier: ^3.10.2
-        version: 3.10.2(vite@7.0.0(sass@1.89.2))
+        version: 3.10.2(vite@7.0.0(@types/node@24.0.10)(sass@1.89.2))
       eslint:
         specifier: ^9.29.0
         version: 9.30.0
@@ -65,7 +65,7 @@ importers:
         version: 8.35.0(eslint@9.30.0)(typescript@5.8.3)
       vite:
         specifier: ^7.0.0
-        version: 7.0.0(sass@1.89.2)
+        version: 7.0.0(@types/node@24.0.10)(sass@1.89.2)
 
 packages:
 
@@ -1659,6 +1659,8 @@ snapshots:
     dependencies:
       readdirp: 4.1.2
 
+  clsx@2.1.1: {}
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
@@ -2085,11 +2087,13 @@ snapshots:
 
   typescript@5.8.3: {}
 
+  undici-types@7.8.0: {}
+
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
 
-  vite@7.0.0(sass@1.89.2):
+  vite@7.0.0(@types/node@24.0.10)(sass@1.89.2):
     dependencies:
       esbuild: 0.25.5
       fdir: 6.4.6(picomatch@4.0.2)
