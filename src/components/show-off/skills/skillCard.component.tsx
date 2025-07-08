@@ -28,7 +28,7 @@ export default function SkillCardComponent({
     <div
       className={clsx(
         styles.card,
-        globalIndex === draggedIndex && styles.dragging
+        globalIndex === draggedIndex && styles.dragging,
       )}
       draggable
       onDragStart={(e) => onDragStart(e, globalIndex)}
