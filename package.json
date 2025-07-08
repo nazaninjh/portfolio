@@ -12,9 +12,13 @@
     "prettier:fix": "prettier . --write"
   },
   "dependencies": {
+    "@types/node": "^24.0.10",
+    "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
     "sass": "^1.89.2"
   },
   "devDependencies": {
