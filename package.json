@@ -12,6 +12,8 @@
     "prettier:fix": "prettier . --write"
   },
   "dependencies": {
+    "@types/node": "^24.0.10",
+    "clsx": "^2.1.1",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

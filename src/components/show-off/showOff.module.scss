@@ -1,0 +1,42 @@
+@use "./../../styles/mixin" as mixin;
+
+@use "./../../styles/placeholders";
+
+%opposite-colors {
+  background-color: var(--surface-hover-clr);
+  color: var(--theme-text-color);
+}
+
+.wrapper {
+  display: grid;
+
+  width: 100%;
+  .btns {
+    display: flex;
+    gap: 0.5rem;
+    height: fit-content;
+    padding: 1rem;
+    border-radius: 0.75rem 0.5rem;
+    background-color: var(--surface-clr);
+    > .btn {
+      @include mixin.Shared_btn(
+        $bg: var(--surface-clr),
+        $text-color: var(--theme-text-color)
+      );
+      padding: 1rem;
+      width: 100%;
+
+      cursor: pointer;
+
+      transition: background-color 300ms ease-in;
+
+      &:hover {
+        @extend %opposite-colors;
+      }
+
+      &.active {
+        @extend %opposite-colors;
+      }
+    }
+  }
+}

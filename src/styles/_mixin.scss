@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "./breakpoints" as breakMap;
 @use "./maps" as colorMap;
+
 @mixin apply_theme($theme) {
   @each $key, $value in $theme {
     --#{$key}: #{$value};
@@ -21,7 +22,7 @@
 ) {
   background-color: $bg;
   color: $text-color;
-  width: auto;
+
   padding: 0.9rem 0.75rem;
 
   border-radius: 0.4rem;
