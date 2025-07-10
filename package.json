@@ -12,6 +12,7 @@
     "prettier:fix": "prettier . --write"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@types/node": "^24.0.10",
     "clsx": "^2.1.1",
     "gsap": "^3.13.0",
