@@ -1,5 +1,5 @@
 import { useState, type SVGProps } from "react";
-import { MapMediaCreator } from "@/creators/mapMediaCreator";
+
 import jsICon from "./assets/icons/js.icon";
 import nextICon from "./assets/icons/next.icon";
 import reactICon from "./assets/icons/react.icon";
@@ -8,6 +8,7 @@ import jsonInfo from "./assets/json/skills.json";
 import SkillCardComponent from "./skillCard.component";
 
 import styles from "./skills.module.scss";
+import { MapMediaCreator } from "@/creators/mapMediaCreator";
 
 type IJson = {
   title: string;
@@ -48,7 +49,7 @@ export default function SkillsComponent() {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="skill-wrapper">
       {skills.map((card, index) => {
         const Icon = media.mapMedia(card.icon) as React.FC<
           SVGProps<SVGSVGElement>

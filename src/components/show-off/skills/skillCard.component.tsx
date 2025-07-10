@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 import { StarIcon } from "./assets/icons/star.icon";
 import styles from "./skills.module.scss";
 import clsx from "clsx";
+
 type IProps = {
   Icon: React.FC<SVGProps<SVGSVGElement>>;
   title: string;
@@ -29,6 +30,7 @@ export default function SkillCardComponent({
       className={clsx(
         styles.card,
         globalIndex === draggedIndex && styles.dragging,
+        "skill-card"
       )}
       draggable
       onDragStart={(e) => onDragStart(e, globalIndex)}

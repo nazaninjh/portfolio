@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 
 export type IProjectProps = {
   imageDimensions: {
@@ -110,28 +109,6 @@ export default function useShowOff() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
-
-  useEffect(() => {
-    if (!videoRefs.current) return;
-    videoRefs.current.forEach((video, index) => {
-      if (!video) return;
-      gsap.fromTo(
-        video,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: index * 2,
-          scrollTrigger: {
-            start: "end start",
-
-            markers: true,
-          },
-        }
-      );
-    });
   }, []);
 
   return {

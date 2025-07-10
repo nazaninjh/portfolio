@@ -5,6 +5,10 @@ import ShowOffComponent from "./components/show-off/showOff.component";
 
 import styles from "./App.module.scss";
 import Test from "./pages/test/Test";
+import gsap from "gsap";
+import { ScrollTrigger, SplitText, Draggable } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(ScrollTrigger, useGSAP, SplitText, Draggable);
 export default function App() {
   return (
     <Routes>
